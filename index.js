@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 
     if (!authHeader) {
         console.log("[Auth] No Authorization header, rejecting request.");
-        res.setHeader("WWW-Authenticate", 'Bearer error="invalid_token"');
+        res.setHeader("WWW-Authenticate", 'Bearer error="invalid_token, error_description="Your access token has expired. Please renew it before submitting the request."');
         return res.status(401).json({ error: "Unauthorized" });
     }
 
