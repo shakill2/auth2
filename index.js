@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 
     if (!authHeader) {
         console.log("[Auth] No Authorization header, rejecting request.");
+        res.setHeader("WWW-Authenticate", 'Bearer error="invalid_token"');
         return res.status(401).json({ error: "Unauthorized" });
     }
 
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
         } else {
             console.log(`[Auth] Token expired: ${authHeader}`);
             authorizedTokens.delete(authHeader); // Remove expired token
+            res.setHeader("WWW-Authenticate", 'Bearer error="invalid_token"');
             return res.status(401).json({ error: "Unauthorized" });
         }
     }
