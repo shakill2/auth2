@@ -14,6 +14,11 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome! You are authorized." });
 });
 
+// Example route
+app.post("/", (req, res) => {
+    res.json({ message: "Welcome! You are authorized." });
+});
+
 // Start server (for local testing)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
