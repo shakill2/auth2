@@ -21,7 +21,14 @@ app.use(express.json());
 app.use((req, res, next) => {
     const authHeader = req.headers.authorization;
     const currentTime = Math.floor(Date.now() / 1000);
-
+     
+    const certHeader = req.headers['x-ssl-client-cert'];
+    if (certHeader) {
+        console.log("Client certificate detected:", certHeader);
+    } else {
+        console.log("No client certificate found.");
+    }
+    
     if (!authHeader) {
         console.log("[Auth] No Authorization header, rejecting request.");
         res.setHeader("WWW-Authenticate", 'Bearer error="invalid_token", error_description="Your access token has expired. Please renew it before submitting the request."');
